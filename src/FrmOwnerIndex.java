@@ -103,7 +103,24 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
 
     public void addOwner() {
 
-
+        Owner newowner = new Owner();
+        try {
+            OwnerDAO.insert(newowner);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        new DlgOwner(newowner);
+        this.owners.add(newowner);
+        try {
+            OwnerDAO.update(newowner);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        populate();
     }
 
     public static void main(String[] args) {

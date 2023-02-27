@@ -34,7 +34,7 @@ public class DlgOwner extends JDialog implements ActionListener {
         setTitle("Owner " + owner.getName());
 
         initUI();
-        populate();
+        if(owner.getName() != null) populate();
 
         setVisible(true);
     }
@@ -176,12 +176,11 @@ public class DlgOwner extends JDialog implements ActionListener {
 
     private void detailDisco() {
 
-        /*
         int selected = this.tblDiscos.getSelectedRow();
         if(selected == -1) return;
 
-        new DlgOwner(this.owner.getDiscos().get(selected));
-        populate();*/
+        new DlgDisco(this.owner.getDiscos().get(selected));
+        populate();
     }
 
 
