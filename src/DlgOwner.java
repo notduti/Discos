@@ -34,7 +34,7 @@ public class DlgOwner extends JDialog implements ActionListener {
         setTitle("Owner " + owner.getName());
 
         initUI();
-        if(owner.getName() != null) populate();
+        populate();
 
         setVisible(true);
     }
@@ -49,10 +49,12 @@ public class DlgOwner extends JDialog implements ActionListener {
             model.addColumn(col);
 
         ArrayList<Disco> discos = owner.getDiscos();
-        for(Disco disco: discos)
-            model.addRow(disco.toRow());
+        if(discos != null) {
 
-        this.tblDiscos.setModel(model);
+            for(Disco disco: discos)
+               model.addRow(disco.toRow());
+            this.tblDiscos.setModel(model);
+        }
 
         this.txtId.setText(owner.getId() + "");
         this.txtName.setText(owner.getName());
@@ -123,6 +125,11 @@ public class DlgOwner extends JDialog implements ActionListener {
         pnlSouth.add(btnDelete);
 
         this.add(pnlSouth, BorderLayout.SOUTH);
+
+        this.btnAdd.addActionListener(this);
+        this.btnDelete.addActionListener(this);
+        this.btnDetail.addActionListener(this);
+        this.btnUpdate.addActionListener(this);
     }
 
     @Override
@@ -179,11 +186,25 @@ public class DlgOwner extends JDialog implements ActionListener {
         int selected = this.tblDiscos.getSelectedRow();
         if(selected == -1) return;
 
+        //System.out.println(this.owner.getDiscos().get(selected).toString());
         new DlgDisco(this.owner.getDiscos().get(selected));
         populate();
     }
 
 
     private void addDisco() {
+
+        Disco disco = new Disco(this.owner.getId(), null, 0);
+        new DlgDisco(disco);
+        this.owner.addDisco(disco);
+        try {
+            DiscoDAO.insert(disco);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        populate();
     }
 }

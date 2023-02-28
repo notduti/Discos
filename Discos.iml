@@ -10,7 +10,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../Materiale scolastico/INFORMATICA/Java/jar/jdbc/sqlite-jdbc-3.40.0.0.jar!/" />
+          <root url="jar://C:/Materiale scolastico/INFORMATICA/Java/jar/jdbc/sqlite-jdbc-3.40.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://Z:/INFORMATICA/Java/jar/sqlite/sqlite-jdbc-3.40.0.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

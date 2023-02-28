@@ -10,6 +10,8 @@ public class Disco {
         this.capacity = capacity;
     }
 
+    public Disco() {}
+
     public int getId() {
         return id;
     }

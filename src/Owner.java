@@ -22,6 +22,11 @@ public class Owner {
         this.discos = discos;
     }
 
+    public void addDisco(Disco disco) {
+
+        this.discos.add(disco);
+    }
+
     public int getId() {
         return id;
     }

@@ -5,18 +5,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class OwnerDAO extends DAO {
+/*
+    public static void main(String[] args) {
 
-    public static void insert(Owner owner) throws SQLException, ClassNotFoundException {
+        try {
+            System.out.println(OwnerDAO.insert(new Owner()) + "");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+    public static int insert(Owner owner) throws SQLException, ClassNotFoundException {
 
         conn = connect();
-        String sql = "INSERT INTO owners VALUES(" +
-                owner.getId() + ", '" +
+        String sql = "INSERT INTO owners VALUES(NULL, '" +
                 owner.getName() + "', '" +
                 owner.getSurname() + "', '" +
                 owner.getPlace() + "', '" +
                 owner.getDate() + "');";
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
+
+        String sql2 = "SELECT last_insert_rowid() as last FROM owners;";
+        Statement stmt2 = conn.createStatement();
+        ResultSet rs = stmt2.executeQuery(sql2);
+        rs.next();
+        return rs.getInt("last");
     }
 
     public static Owner read(int id) throws SQLException, ClassNotFoundException {

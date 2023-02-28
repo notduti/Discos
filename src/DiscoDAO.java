@@ -65,7 +65,7 @@ public class DiscoDAO extends DAO {
     public static void update(Disco disco) throws SQLException, ClassNotFoundException {
 
         conn = connect();
-        String sql = "UPDATE discos SET nome='" + disco.getName() +
+        String sql = "UPDATE discos SET name='" + disco.getName() +
                 "', capacity = "+disco.getCapacity() +
                 " WHERE id = " + disco.getId() + ";";
         Statement stmt = conn.createStatement();

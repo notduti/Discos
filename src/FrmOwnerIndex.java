@@ -56,7 +56,7 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
 
         DefaultTableModel model = new DefaultTableModel();
 
-        String[] cols = {"Id", "Name", "Surname", "Date of Birth", "Residence"};
+        String[] cols = {"Id", "Name", "Surname", "Residence", "Date of Birth"};
         for(String col:cols)
             model.addColumn(col);
 
@@ -104,13 +104,16 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
     public void addOwner() {
 
         Owner newowner = new Owner();
+        int id;
         try {
-            OwnerDAO.insert(newowner);
+            id = OwnerDAO.insert(newowner);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        newowner.setId(id);
+        //System.out.println(newowner.toString());
         new DlgOwner(newowner);
         this.owners.add(newowner);
         try {
