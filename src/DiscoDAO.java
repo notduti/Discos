@@ -6,7 +6,6 @@ public class DiscoDAO extends DAO {
     public static int insert(Disco disco) throws SQLException, ClassNotFoundException {
 
         conn = connect();
-        //disco.toString();
         String sql = "INSERT INTO discos VALUES(NULL, "
                 + disco.getId() + ",'"
                 + disco.getName() + "',"
@@ -21,7 +20,7 @@ public class DiscoDAO extends DAO {
         return rs.getInt("last");
     }
 
-    public static Disco read (int iddisco) throws SQLException, ClassNotFoundException {
+    public static Disco read(int iddisco) throws SQLException, ClassNotFoundException {
 
         conn = connect();
         String sql = "SELECT * FROM discos WHERE iddisco = " + iddisco + ";";
@@ -44,12 +43,11 @@ public class DiscoDAO extends DAO {
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(sql);
 
-        while(result.next()){
+        while(result.next())
             discos.add(new Disco(result.getInt("iddisco"),
                     result.getInt("id"),
                     result.getString("name"),
                     result.getInt("capacity")));
-        }
 
         return discos;
     }
@@ -62,12 +60,12 @@ public class DiscoDAO extends DAO {
         ResultSet result = stmt.executeQuery(sql);
         ArrayList<Disco> discos = new ArrayList<>();
 
-        while(result.next()) {
+        while(result.next())
             discos.add(new Disco(result.getInt("iddisco"),
                     result.getInt("id"),
                     result.getString("name"),
                     result.getInt("capacity")));
-        }
+
         return discos;
     }
 

@@ -5,17 +5,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class OwnerDAO extends DAO {
-/*
-    public static void main(String[] args) {
-
-        try {
-            System.out.println(OwnerDAO.insert(new Owner()) + "");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     public static int insert(Owner owner) throws SQLException, ClassNotFoundException {
 
@@ -47,7 +36,6 @@ public class OwnerDAO extends DAO {
         return new Owner(rs.getInt("id"), rs.getString("name"),
                 rs.getString("surname"), rs.getString("place"),
                 rs.getString("date"), discos);
-
     }
 
     public static ArrayList<Owner> readAll() throws SQLException, ClassNotFoundException {

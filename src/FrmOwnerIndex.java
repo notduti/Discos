@@ -98,6 +98,7 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
         if(selected == -1) return;
 
         new DlgOwner(this.owners.get(selected));
+
         populate();
     }
 
@@ -105,6 +106,7 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
 
         Owner newowner = new Owner();
         int id;
+
         try {
             id = OwnerDAO.insert(newowner);
         } catch (SQLException e) {
@@ -112,10 +114,11 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         newowner.setId(id);
-        //System.out.println(newowner.toString());
         new DlgOwner(newowner);
         this.owners.add(newowner);
+
         try {
             OwnerDAO.update(newowner);
         } catch (SQLException e) {
@@ -123,6 +126,7 @@ public class FrmOwnerIndex extends JFrame implements ActionListener {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         populate();
     }
 

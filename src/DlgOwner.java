@@ -28,9 +28,9 @@ public class DlgOwner extends JDialog implements ActionListener {
         this.owner = owner;
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setModal(true);
         setSize(500, 600);
         setLocationRelativeTo(null);
-        System.out.println(owner);
         setTitle("Owner " + owner.getName());
 
         initUI();
@@ -187,7 +187,6 @@ public class DlgOwner extends JDialog implements ActionListener {
         int selected = this.tblDiscos.getSelectedRow();
         if(selected == -1) return;
 
-        //System.out.println(this.owner.getDiscos().get(selected).toString());
         new DlgDisco(this.owner.getDiscos().get(selected));
         populate();
     }
@@ -197,6 +196,7 @@ public class DlgOwner extends JDialog implements ActionListener {
 
         Disco disco = new Disco();
         int iddisco;
+
         try {
             iddisco = DiscoDAO.insert(disco);
         } catch (SQLException e) {
@@ -204,6 +204,7 @@ public class DlgOwner extends JDialog implements ActionListener {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         disco.setIddisco(iddisco);
         disco.setId(this.owner.getId());
         new DlgDisco(disco);
@@ -216,16 +217,7 @@ public class DlgOwner extends JDialog implements ActionListener {
             throw new RuntimeException(e);
         }
 
-        /*
-        new DlgDisco(disco);
         this.owner.addDisco(disco);
-        try {
-            DiscoDAO.insert(disco);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }*/
 
         populate();
     }

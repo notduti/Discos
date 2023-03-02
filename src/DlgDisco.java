@@ -16,8 +16,8 @@ public class DlgDisco extends JDialog implements ActionListener {
     public DlgDisco(Disco disco) {
 
         this.disco = disco;
-        System.out.println(this.disco.toString());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setModal(true);
         setSize(400, 200);
         setLocationRelativeTo(null);
         setTitle("Disco " + this.disco.getName());
@@ -85,11 +85,8 @@ public class DlgDisco extends JDialog implements ActionListener {
 
         if(e.getSource() == btnUpdate) {
 
-            //this.disco.setIddisco(Integer.parseInt(this.txtIddisco.getText()));
-            //this.disco.setId(Integer.parseInt(this.txtId.getText()));
             this.disco.setName(this.txtName.getText());
             this.disco.setCapacity(Integer.parseInt(this.txtCapacity.getText()));
-            //System.out.println(this.disco.toString());
 
             try {
                 DiscoDAO.update(this.disco);
