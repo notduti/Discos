@@ -1,16 +1,26 @@
 public class Disco {
 
+    private int iddisco = 0;
     private int id = 0;
     private String name = null;
     private int capacity = 0;
 
-    public Disco(int id, String name, int capacity) {
+    public Disco(int iddisco, int id, String name, int capacity) {
+        this.iddisco = iddisco;
         this.id = id;
         this.name = name;
         this.capacity = capacity;
     }
 
     public Disco() {}
+
+    public int getIddisco() {
+        return iddisco;
+    }
+
+    public void setIddisco(int iddisco) {
+        this.iddisco = iddisco;
+    }
 
     public int getId() {
         return id;
@@ -39,7 +49,8 @@ public class Disco {
     @Override
     public String toString() {
         return "Disco{" +
-                "id=" + id +
+                "iddisco=" + iddisco +
+                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", capacity=" + capacity +
                 '}';
@@ -47,11 +58,12 @@ public class Disco {
 
     public String[] toRow() {
 
-        String[] ret = new String[3];
+        String[] ret = new String[4];
 
-        ret[0] = this.id + "";
-        ret[1] = this.name;
-        ret[2] = this.capacity + "";
+        ret[0] = this.iddisco + "";
+        ret[1] = this.id + "";
+        ret[2] = this.name;
+        ret[3] = this.capacity + "";
 
         return ret;
     }

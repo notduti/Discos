@@ -43,7 +43,7 @@ public class DlgOwner extends JDialog implements ActionListener {
 
         DefaultTableModel model = new DefaultTableModel();
 
-        String[] cols = {"id", "name", "capacity"};
+        String[] cols = {"iddisco", "id", "name", "capacity"};
 
         for(String col: cols)
             model.addColumn(col);
@@ -151,6 +151,7 @@ public class DlgOwner extends JDialog implements ActionListener {
         this.owner.setSurname(this.txtSurname.getText());
         this.owner.setPlace(this.txtPlace.getText());
         this.owner.setDate(this.txtDate.getText());
+
         try {
             OwnerDAO.update(this.owner);
         } catch (SQLException e) {
@@ -194,7 +195,28 @@ public class DlgOwner extends JDialog implements ActionListener {
 
     private void addDisco() {
 
-        Disco disco = new Disco(this.owner.getId(), null, 0);
+        Disco disco = new Disco();
+        int iddisco;
+        try {
+            iddisco = DiscoDAO.insert(disco);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        disco.setIddisco(iddisco);
+        disco.setId(this.owner.getId());
+        new DlgDisco(disco);
+
+        try {
+            DiscoDAO.update(disco);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*
         new DlgDisco(disco);
         this.owner.addDisco(disco);
         try {
@@ -203,7 +225,7 @@ public class DlgOwner extends JDialog implements ActionListener {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         populate();
     }

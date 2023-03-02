@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class DlgDisco extends JDialog implements ActionListener {
 
     private Disco disco = null;
+    private JTextField txtIddisco = null;
     private JTextField txtId = null;
     private JTextField txtName = null;
     private JTextField txtCapacity = null;
@@ -29,7 +30,15 @@ public class DlgDisco extends JDialog implements ActionListener {
 
     private void initUI() {
 
-        JPanel pnlCenter = new JPanel(new GridLayout(3, 1));
+        JPanel pnlCenter = new JPanel(new GridLayout(4, 1));
+
+        JPanel pnlIddisco = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel lblIddisco = new JLabel("Iddisco:");
+        this.txtIddisco = new JTextField(20);
+        this.txtIddisco.setEnabled(false);
+        pnlIddisco.add(lblIddisco);
+        pnlIddisco.add(this.txtIddisco);
+        pnlCenter.add(pnlIddisco);
 
         JPanel pnlId = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lblId = new JLabel("Id:");
@@ -59,10 +68,13 @@ public class DlgDisco extends JDialog implements ActionListener {
         this.btnUpdate = new JButton("Update");
         pnlSouth.add(this.btnUpdate);
         this.add(pnlSouth, BorderLayout.SOUTH);
+
+        this.btnUpdate.addActionListener(this);
     }
 
     private void populate() {
 
+        this.txtIddisco.setText(this.disco.getIddisco() + "");
         this.txtId.setText(this.disco.getId() + "");
         this.txtName.setText(this.disco.getName());
         this.txtCapacity.setText(this.disco.getCapacity() + "");
@@ -72,6 +84,12 @@ public class DlgDisco extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == btnUpdate) {
+
+            //this.disco.setIddisco(Integer.parseInt(this.txtIddisco.getText()));
+            //this.disco.setId(Integer.parseInt(this.txtId.getText()));
+            this.disco.setName(this.txtName.getText());
+            this.disco.setCapacity(Integer.parseInt(this.txtCapacity.getText()));
+            //System.out.println(this.disco.toString());
 
             try {
                 DiscoDAO.update(this.disco);
